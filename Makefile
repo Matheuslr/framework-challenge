@@ -30,28 +30,29 @@ dependencies: _base-pip  ## Install dependencies
 # Lint section
 ###
 _flake8:
-	@flake8 --show-source framework_api/
+	@flake8 --show-source framework_api/ app/
 
 _isort:
-	@isort --check-only framework_api/
+	@isort --check-only framework_api/ app/
 
 _black:
-	@black --diff --check framework_api/
+	@black --diff --check framework_api/ app/
 
 _isort-fix:
-	@isort framework_api/
+	@isort framework_api/ app/
 
 _black-fix:
-	@black framework_api/
+	@black framework_api/ app/
 
 _dead-fixtures:
-	@pytest framework_api/ --dead-fixtures
+	@pytest framework_api/ app/ --dead-fixtures
 
 _mypy:
-	@mypy framework_api/
+	@mypy framework_api/ app/
 
 lint: _flake8 _isort _black _dead-fixtures  ## Check code lint
 format-code: _isort-fix _black-fix  ## Format code
+
 
 
 ###
