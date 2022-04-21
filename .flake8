@@ -1,0 +1,13 @@
+[flake8]
+max-complexity = 9
+max-line-length = 79
+ignore = E231, W503, F401
+exclude =
+    .git,
+    .gitignore,
+    *.pot,
+    *.py[co],
+    __pycache__,
+    env,
+    venv,
+    .env
