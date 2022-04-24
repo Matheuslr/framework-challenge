@@ -15,7 +15,7 @@ class CustomUserAuthentication(BaseAuthentication):
         try:
             payload = jwt.decode(
                 token, settings.JWT_SECRET, algorithms=["HS256"]
-            )
+            )  # no qa
         except Exception:
             raise AuthenticationFailed("Unathorized")
 

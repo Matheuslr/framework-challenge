@@ -41,7 +41,7 @@ _isort-fix:
 	@isort framework_api/ json_placeholder/ user/
 
 _black-fix:
-	@black -l 79 framework_api/ json_placeholder/ user/
+	@black framework_api/ json_placeholder/ user/
 
 _dead-fixtures:
 	@pytest framework_api/ json_placeholder/ user/ --dead-fixtures

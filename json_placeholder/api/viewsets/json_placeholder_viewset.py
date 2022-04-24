@@ -1,3 +1,6 @@
+"""
+isort:skip_file
+"""
 import os
 
 import requests
