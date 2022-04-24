@@ -1,0 +1,40 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Create env file
+      run: make copy-envs
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        make dependencies
+    - name: Run Migrations
+      run: |
+        make migrations migrate
+    - name: Run Lint
+      run: |
+        make lint
+    - name: Run Tests
+      run: |
+        make test-coverage
+    
+
