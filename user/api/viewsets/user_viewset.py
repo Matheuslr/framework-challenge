@@ -13,6 +13,7 @@ from rest_framework.status import (
 
 from framework_api.helpers import info_logging
 from user.api.serializers.user_serialize import (
+    UserLoginSerializerRequest,
     UserLogoutSerializerRequest,
     UserRegisterSerializerRequest,
     UserRegisterSerializerResponse,
@@ -49,7 +50,7 @@ class LoginViewset(views.APIView):
 
     @swagger_auto_schema(
         operation_description=description,
-        request_body=UserRegisterSerializerResponse,
+        request_body=UserLoginSerializerRequest,
         responses={204: {}},
     )
     def post(self, request):

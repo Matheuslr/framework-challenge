@@ -88,11 +88,9 @@ migrate:
 ###
 build:  ## Docker: Initialize project
 	docker-compose build
-	make run-migrations
-	make run-migrate
 
 run-docker:  ## Docker: Run server
-	docker-compose run --service-ports --rm web bash -c "make run-local"
+	docker-compose run --service-ports --rm web bash -c "make migrations migrate run-local"
 
 run-bash:  ## Docker: Get bash from container
 	docker-compose run --service-ports --rm web bash
