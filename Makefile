@@ -25,35 +25,32 @@ export-requirements: _base-pip
 dependencies: _base-pip  ## Install dependencies
 	@pip install -r requirements.txt
 
-
 ###
 # Lint section
 ###
 _flake8:
-	@flake8 --show-source framework_api/ app/
+	@flake8 --show-source framework_api/ json_placeholder/ user/
 
 _isort:
-	@isort --check-only framework_api/ app/
+	@isort --check-only framework_api/ json_placeholder/ user/
 
 _black:
-	@black --diff --check framework_api/ app/
+	@black --diff --check framework_api/ json_placeholder/ user/
 
 _isort-fix:
-	@isort framework_api/ app/
+	@isort framework_api/ json_placeholder/ user/
 
 _black-fix:
-	@black framework_api/ app/
+	@black -l 79 framework_api/ json_placeholder/ user/
 
 _dead-fixtures:
-	@pytest framework_api/ app/ --dead-fixtures
+	@pytest framework_api/ json_placeholder/ user/ --dead-fixtures
 
 _mypy:
-	@mypy framework_api/ app/
+	@mypy framework_api/ json_placeholder/ user/
 
 lint: _flake8 _isort _black _dead-fixtures  ## Check code lint
 format-code: _isort-fix _black-fix  ## Format code
-
-
 
 ###
 # Run local section
@@ -61,7 +58,32 @@ format-code: _isort-fix _black-fix  ## Format code
 copy-envs:  ## Copy `.env.example` to `.env`
 	@cp -n .env.example .env
 
-init: dev-dependencies pre-commit-install copy-envs ## Initialize project
+init: dev-dependencies copy-envs ## Initialize project
 
 run-local:  ## Run server
 	@python manage.py runserver
+
+###
+# Tests section
+###
+test: clean  ## Run tests
+	@pytest tests/
+
+test-coverage: clean  ## Run tests with coverage output
+	@pytest tests/ --cov json_placeholder/ --cov user/ --cov-report term-missing --cov-report xml
+
+test-matching: clean  ## Run tests by match ex: make test-matching k=name_of_test
+	@pytest -k $(k) tests/
+
+test-security: clean  ## Run security tests with bandit and safety
+	@python -m bandit -r app -x "test"
+	@python -m safety check
+
+###
+# Database section
+###
+migrations: 
+	@python manage.py makemigrations
+
+migrate: 
+	@python manage.py migrate

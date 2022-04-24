@@ -10,4 +10,5 @@ exclude =
     __pycache__,
     env,
     venv,
-    .env
+    .env,
+    *migrations,
