@@ -5,6 +5,7 @@ import pytest
 from rest_framework.status import (
     HTTP_200_OK,
     HTTP_201_CREATED,
+    HTTP_204_NO_CONTENT,
     HTTP_401_UNAUTHORIZED,
     HTTP_403_FORBIDDEN,
 )
@@ -41,7 +42,7 @@ def test_should_login_user(client, user: "UserDataClass"):
         "/api/login/", json.dumps(payload), content_type="application/json"
     )
 
-    assert response.status_code == HTTP_200_OK
+    assert response.status_code == HTTP_204_NO_CONTENT
 
 
 @pytest.mark.django_db
