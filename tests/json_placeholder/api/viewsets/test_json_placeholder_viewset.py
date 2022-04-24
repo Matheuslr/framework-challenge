@@ -2,7 +2,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 from django import http
-from rest_framework.status import HTTP_200_OK, HTTP_503_SERVICE_UNAVAILABLE, HTTP_404_NOT_FOUND
+from rest_framework.status import HTTP_200_OK, HTTP_503_SERVICE_UNAVAILABLE
 
 
 class TestJsonPlaceHolderViewset:
@@ -29,8 +29,7 @@ class TestJsonPlaceHolderViewset:
         {
             "userId": 1,
             "id": 5,
-            "title": "laboriosam mollitia et enim quasi adipisci\
-                 quia provident illum",
+            "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
             "completed": False,
         },
         {
@@ -70,11 +69,7 @@ class TestJsonPlaceHolderViewset:
         {"id": 2, "title": "quis ut nam facilis et officia qui"},
         {"id": 3, "title": "fugiat veniam minus"},
         {"id": 4, "title": "et porro tempora"},
-        {
-            "id": 5,
-            "title": "laboriosam mollitia et enim quasi\
-                 adipisci quia provident illum",
-        },
+        {"id": 5, "title": "laboriosam mollitia et enim quasi adipisci quia provident illum"},
     ]
 
     @pytest.mark.django_db
@@ -115,5 +110,5 @@ class TestJsonPlaceHolderViewset:
             mock_get.side_effect = http.Http404("error")
             response = auth_client.get("/api/app/json-placeholder/")
             data = response.json()
-            assert response.status_code == HTTP_404_NOT_FOUND
+            assert response.status_code == HTTP_503_SERVICE_UNAVAILABLE
             assert data["error"]["reason"] == "error"

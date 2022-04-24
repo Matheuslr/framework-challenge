@@ -65,9 +65,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "first_name",
-                    models.CharField(
-                        max_length=255, verbose_name="First Name"
-                    ),
+                    models.CharField(max_length=255, verbose_name="First Name"),
                 ),
                 (
                     "last_name",
@@ -75,9 +73,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "email",
-                    models.CharField(
-                        max_length=255, unique=True, verbose_name="email"
-                    ),
+                    models.CharField(max_length=255, unique=True, verbose_name="email"),
                 ),
                 ("password", models.CharField(max_length=255)),
                 (

@@ -1,5 +1,6 @@
-import requests
-from drf_yasg import openapi
+"""
+isort:skip_file
+"""
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import exceptions, views
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -12,7 +13,6 @@ from rest_framework.status import (
 
 from framework_api.helpers import info_logging
 from user.api.serializers.user_serialize import (
-    UserLoginSerializerRequest,
     UserLogoutSerializerRequest,
     UserRegisterSerializerRequest,
     UserRegisterSerializerResponse,
