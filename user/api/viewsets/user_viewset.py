@@ -1,18 +1,28 @@
 import requests
+
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+
 from rest_framework import exceptions, views
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT
 
 from framework_api.helpers import info_logging
-from user.api.serializers.user_serialize import UserSerializer
+from user.api.serializers.user_serialize import (
+    UserLogoutSerializerRequest, UserSerializer,UserRegisterSerializerResponse,UserRegisterSerializerRequest
+    ,UserLoginSerializerRequest)
 from user.authentication import CustomUserAuthentication
 from user.services import UserDataClass as service
 
 
 class RegisterViewset(views.APIView):
     permission_classes = (AllowAny,)
-
+    description= "a route to register users"
+    @swagger_auto_schema(operation_description=description, 
+    request_body = UserRegisterSerializerRequest,
+    responses={201: UserRegisterSerializerResponse(many=True)}
+    )
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -27,7 +37,12 @@ class RegisterViewset(views.APIView):
 class LoginViewset(views.APIView):
 
     permission_classes = (AllowAny,)
+    description= "a route to login users"
 
+    @swagger_auto_schema(operation_description=description, 
+        request_body = UserRegisterSerializerResponse,
+        responses={204: {}}
+        )
     def post(self, request):
         email = request.data.get("email", None)
         password = request.data.get("password", None)
@@ -47,7 +62,7 @@ class LoginViewset(views.APIView):
 
         token = service.create_token(user_id=user.id)
 
-        resp = Response(status=HTTP_200_OK)
+        resp = Response(status=HTTP_204_NO_CONTENT)
 
         resp.set_cookie(key="jwt", value=token, httponly=True)
 
@@ -58,6 +73,10 @@ class UserViewSet(views.APIView):
     authentication_classes = (CustomUserAuthentication,)
     permission_classes = (IsAuthenticated,)
 
+    description= "a route to retrive info from logged user"
+    @swagger_auto_schema(operation_description=description, 
+        responses={200: UserLogoutSerializerRequest(many=True)}
+    )
     def get(self, request):
         user = request.user
 
@@ -70,6 +89,10 @@ class LogoutApi(views.APIView):
     authentication_classes = (CustomUserAuthentication,)
     permission_classes = (IsAuthenticated,)
 
+    description= "a route to logout users"
+    @swagger_auto_schema(operation_description=description, 
+        responses={200: UserLogoutSerializerRequest(many=True)}
+    )
     def post(self, request):
         resp = Response(status=HTTP_200_OK)
         resp.delete_cookie("jwt")

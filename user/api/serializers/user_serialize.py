@@ -15,3 +15,22 @@ class UserSerializer(serializers.Serializer):
         data = super().to_internal_value(data)
 
         return UserDataClass(**data)
+
+
+class UserRegisterSerializerResponse(serializers.Serializer):
+    id = serializers.IntegerField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    email = serializers.CharField()
+
+class UserRegisterSerializerRequest(serializers.Serializer):
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    email = serializers.CharField()
+    password = serializers.CharField()
+class UserLoginSerializerRequest(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField()
+
+class UserLogoutSerializerRequest(serializers.Serializer):
+    message= serializers.CharField()
