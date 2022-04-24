@@ -11,7 +11,7 @@ from rest_framework.status import (
     HTTP_204_NO_CONTENT,
 )
 
-from framework_api.helpers import info_logging
+from framework_api.helpers import error_logging, info_logging
 from user.api.serializers.user_serialize import (
     UserLoginSerializerRequest,
     UserLogoutSerializerRequest,
@@ -58,16 +58,20 @@ class LoginViewset(views.APIView):
         password = request.data.get("password", None)
 
         if not email:
+            error_logging(data="Missing email", status_code=403)
             raise exceptions.AuthenticationFailed("Missing email")
         if not password:
+            error_logging(data="Missing password", status_code=403)
             raise exceptions.AuthenticationFailed("Missing password")
 
         user = service.user_email_selector(email=email)
 
         if user is None:
+            error_logging(data="Invalid Credentials", status_code=403)
             raise exceptions.AuthenticationFailed("Invalid Credentials")
 
         if not user.check_password(raw_password=password):
+            error_logging(data="Invalid Credentials", status_code=403)
             raise exceptions.AuthenticationFailed("Invalid Credentials")
 
         token = service.create_token(user_id=user.id)
