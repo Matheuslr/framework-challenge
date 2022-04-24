@@ -92,6 +92,7 @@ migrate:
 ###
 build:  ## Docker: Initialize project
 	docker-compose build
+	make run-migrations
 	make run-migrate
 
 run-docker:  ## Docker: Run server
@@ -111,6 +112,9 @@ run-format-code:  ## Docker: Format code
 
 run-code-convention:  ## Docker: Check code lint
 	docker-compose run --service-ports --no-deps --rm web bash -c "make lint"
+
+run-migrations:  ## Docker: Apply migrations
+	docker-compose run --service-ports --rm web bash -c "make migrations"
 
 run-migrate:  ## Docker: Apply migrations
 	docker-compose run --service-ports --rm web bash -c "make migrate"

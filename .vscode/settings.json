@@ -1,0 +1,5 @@
+{
+  "conventionalCommits.scopes": [
+    "readmd fix and add a step on docker build"
+  ]
+}

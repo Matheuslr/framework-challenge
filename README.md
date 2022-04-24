@@ -24,28 +24,6 @@ Python Django Rest Framework and SQLite database
 
 5. In your browser call: [Swagger Localhost](http://localhost:8000/api/docs)
 
-#### Comands
-
-Executing commands inside the container:
-
-``` bash
-make run-bash
-```
-
-Generate migration: *
-
-``` bash
-make run-migrations name=<MODULE NAME>
-```
-
-Additional dependencies: *
-
-``` bash
-make run-poetry-add name=<LIB NAME>
-```
-
-* Must be inside the container
-
 ### Locally
 
 1. Clone this repository.
