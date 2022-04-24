@@ -2,7 +2,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 from django import http
-from rest_framework.status import HTTP_200_OK, HTTP_503_SERVICE_UNAVAILABLE
+from rest_framework.status import HTTP_200_OK, HTTP_503_SERVICE_UNAVAILABLE, HTTP_404_NOT_FOUND
 
 
 class TestJsonPlaceHolderViewset:
@@ -111,9 +111,9 @@ class TestJsonPlaceHolderViewset:
             "json_placeholder.api.viewsets.json_placeholder_viewset.requests.get"
         ) as mock_get:
 
-            mock_get.return_value.status_code = 503
+            mock_get.return_value.status_code = 404
             mock_get.side_effect = http.Http404("error")
             response = auth_client.get("/api/app/json-placeholder/")
             data = response.json()
-            assert response.status_code == HTTP_503_SERVICE_UNAVAILABLE
+            assert response.status_code == HTTP_404_NOT_FOUND
             assert data["error"]["reason"] == "error"
