@@ -58,7 +58,7 @@ format-code: _isort-fix _black-fix  ## Format code
 copy-envs:  ## Copy `.env.example` to `.env`
 	@cp -n .env.example .env
 
-init: dev-dependencies copy-envs ## Initialize project
+init: dependencies copy-envs ## Initialize project
 
 run-local:  ## Run server
 	@python manage.py runserver

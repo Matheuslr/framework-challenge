@@ -49,10 +49,11 @@ make run-poetry-add name=<LIB NAME>
 ### Locally
 
 1. Clone this repository.
-2. To initialize and install dependencies, run: `make init`
-3. To apply the migrations, run: `make migrate` 
-4. Run: `make run-local`
-5. In your browser call: [Swagger Localhost](http://0.0.0.0:8000/swagger/)
+2. Create a virtualenv
+3. To initialize and install dependencies, run: `make init`
+4. To apply the migrations, run: `make migrate` 
+5. Run: `make run-local`
+6. In your browser call: [Swagger Localhost](http://0.0.0.0:8000/swagger/)
 
 
 #### Testing
