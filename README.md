@@ -8,6 +8,7 @@ Python Django Rest Framework and SQLite database
 - SQLite - Develop Database
 - Docker - Project Structure
 - Docker-compose - Development Environment
+- Github Actions - CI 
 
 
 ## How to use?
@@ -22,7 +23,7 @@ Python Django Rest Framework and SQLite database
 
 4. Run api: `make run`
 
-5. In your browser call: [Swagger Localhost](http://localhost:8000/api/docs)
+5. In your browser call: [Swagger Localhost](http://0.0.0.0:8000/swagger/)
 
 ### Locally
 
@@ -39,5 +40,7 @@ Python Django Rest Framework and SQLite database
 To test, just run `make test`.
 
 To see the test coverage, run `make test-coverage`
+actual coverage is 100%
 
 To run a specifc test, run `make test-matching k=<test-name>`
+
