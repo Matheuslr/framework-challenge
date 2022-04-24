@@ -23,14 +23,18 @@ class UserRegisterSerializerResponse(serializers.Serializer):
     last_name = serializers.CharField()
     email = serializers.CharField()
 
+
 class UserRegisterSerializerRequest(serializers.Serializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     email = serializers.CharField()
     password = serializers.CharField()
+
+
 class UserLoginSerializerRequest(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
 
+
 class UserLogoutSerializerRequest(serializers.Serializer):
-    message= serializers.CharField()
+    message = serializers.CharField()
