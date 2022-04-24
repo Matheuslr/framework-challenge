@@ -75,10 +75,6 @@ test-coverage: clean  ## Run tests with coverage output
 test-matching: clean  ## Run tests by match ex: make test-matching k=name_of_test
 	@pytest -k $(k) tests/
 
-test-security: clean  ## Run security tests with bandit and safety
-	@python -m bandit -r app -x "test"
-	@python -m safety check
-
 ###
 # Database section
 ###
