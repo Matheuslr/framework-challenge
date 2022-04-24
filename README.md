@@ -35,7 +35,7 @@ Python Django Rest Framework and SQLite database
 4. To apply the migrations, run: `make migrate` 
 5. Run: `make run-local`
 6. In your browser call: [Swagger Localhost](http://0.0.0.0:8000/swagger/)
-7. 6. You can use this too: [OpenAPI Localhost](http://0.0.0.0:8000/redoc/) 
+7. You can use this too: [OpenAPI Localhost](http://0.0.0.0:8000/redoc/) 
 
 
 #### Testing
